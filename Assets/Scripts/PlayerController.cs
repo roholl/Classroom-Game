@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     float vertical;
     float playerSpeed = 5.0f;
 
-    // Start is called before the first frame update
+    public bool holdingItem;
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        holdingItem = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         GetPlayerInput();
@@ -27,12 +27,14 @@ public class PlayerController : MonoBehaviour
     }
     public void GetPlayerInput()
     {
+        //gets input from the arrow keys to be used in the MovePlayer method
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
     }
 
     public void MovePlayer()
     {
+        //uses unity physics to move the attached rigidbody
         Vector2 position = rigidbody2d.position;
         position.x = position.x + playerSpeed * horizontal * Time.deltaTime;
         position.y = position.y + playerSpeed * vertical * Time.deltaTime;
