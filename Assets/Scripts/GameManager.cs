@@ -13,6 +13,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //after an amount of time manager needs to pick a student to need something
     }
 }
