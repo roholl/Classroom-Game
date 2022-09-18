@@ -21,10 +21,12 @@ public class StudentController : MonoBehaviour
     public GameObject thoughtbubblePrefab;
 
     private bool waitingOnItem;
+    private GameObject thought;
 
     // Start is called before the first frame update
     void Start()
     {
+        pCon = GameObject.Find("TeacherSprite").GetComponent<PlayerController>();
         inRange = false;
         waitingOnItem = false;
         this.timeWaited = 0.0f;
@@ -72,6 +74,7 @@ public class StudentController : MonoBehaviour
                 Debug.Log("You gave an item to the student.");
                 pCon.itemGiven();
                 this.waitingOnItem = false;
+                Destroy(this.thought);
             }
         }
     }
@@ -79,11 +82,9 @@ public class StudentController : MonoBehaviour
 
     private void thoughtCreate()
     {
-        Debug.Log("Position:" + transform.position);
-        Debug.Log("Rotation:" + transform.rotation);
-        Debug.Log("Name:" + thoughtbubblePrefab.name);
-        var thought = Instantiate(thoughtbubblePrefab, new Vector3(transform.position.x, transform.position.y +1), transform.rotation);
-        Debug.Log("Thought created:"+thought.name);
+
+        this.thought = Instantiate(thoughtbubblePrefab, new Vector3(transform.position.x, transform.position.y +1), transform.rotation);
+        this.thought.GetComponent<thoughtBubble>().setWantedItem(this.paintSprite);
         this.waitingOnItem = true;
     }
     
