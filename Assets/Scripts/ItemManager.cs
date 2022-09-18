@@ -6,9 +6,12 @@ public class ItemManager : MonoBehaviour
 {
     public bool inRange;
     public PlayerController pCon;
+    public SpriteRenderer itemRenderer;
+    public string itemName;
     // Start is called before the first frame update
     void Start()
     {
+        itemRenderer = gameObject.GetComponent<SpriteRenderer>();
         inRange = false; 
     }
 
@@ -19,6 +22,7 @@ public class ItemManager : MonoBehaviour
         {
             
             pCon.holdingItem = true;
+            pCon.itemObtained(itemRenderer.sprite, itemName);
             Debug.Log("You are now holding an item.");
 
         }

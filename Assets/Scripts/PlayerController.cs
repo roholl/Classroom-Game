@@ -10,10 +10,15 @@ public class PlayerController : MonoBehaviour
     float playerSpeed = 5.0f;
 
     public bool holdingItem = false;
+    public Sprite heldItem;
+    public string itemHeldName;
+
+    public Inventory inventorySpot;
     
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        itemHeldName = "none";
         
     }
 
@@ -48,10 +53,31 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) && holdingItem == true)
         {
-            Debug.Log("You discarded your item.");
-            holdingItem = false;
+            this.removeItem();
 
         }
+    }
+    
+    public void itemObtained(Sprite itemToHold, string itemName)
+    {
+        Debug.Log("Player: spite update.");
+        this.heldItem = itemToHold;
+        this.itemHeldName = itemName;
+        inventorySpot.updateInventory(itemToHold);
+    }
+
+    public void itemGiven()
+    {
+        this.removeItem();
+    }
+
+    private void removeItem()
+    {
+        Debug.Log("You discarded your item.");
+        inventorySpot.updateInventory(null);
+        holdingItem = false;
+        itemHeldName = "none";
+
     }
    
 }
