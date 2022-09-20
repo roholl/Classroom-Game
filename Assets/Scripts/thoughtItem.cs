@@ -23,7 +23,9 @@ public class thoughtItem : MonoBehaviour
     public void setImage(Sprite thoughtImage)
     {
         var parent = gameObject.transform;
-        this.sr.transform.localScale = new Vector3(0.1f, 0.1f);
+        var factor = 0.3f / thoughtImage.bounds.size.y;
+        this.sr.transform.localScale = new Vector3(factor, factor);
+     //   this.sr.transform.position = this.sr.transform.position + new Vector3(0, -0.15f, 0);
         this.sr.sprite = thoughtImage;
     }
 }

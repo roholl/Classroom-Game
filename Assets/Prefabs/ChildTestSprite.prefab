@@ -152,7 +152,7 @@ MonoBehaviour:
   markerSprite: {fileID: 21300000, guid: ca9ccaa93d7e5554a9bf67b3a9395ad9, type: 3}
   coloredPencilSprite: {fileID: 0}
   randomRangeHi: 5
-  randomRangeLow: 60
+  randomRangeLow: 10
   thoughtbubblePrefab: {fileID: 2643363534107712824, guid: 6fc80aabd25dfa541a1c2b5786039481,
     type: 3}
 --- !u!58 &4961569997878688177

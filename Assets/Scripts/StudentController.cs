@@ -82,9 +82,24 @@ public class StudentController : MonoBehaviour
 
     private void thoughtCreate()
     {
-
+        var rand = Random.Range(0, 2);
         this.thought = Instantiate(thoughtbubblePrefab, new Vector3(transform.position.x, transform.position.y +1), transform.rotation);
-        this.thought.GetComponent<thoughtBubble>().setWantedItem(this.paintSprite);
+        var spriteToUse = this.paintSprite;
+        Debug.Log("Rand:" + rand);
+        switch (rand)
+        {
+            case 0:
+                break;
+            case 1:
+                spriteToUse = this.markerSprite;
+                break;
+            default:
+                break;
+        }
+           
+
+
+        this.thought.GetComponent<thoughtBubble>().setWantedItem(spriteToUse);
         this.waitingOnItem = true;
     }
     
