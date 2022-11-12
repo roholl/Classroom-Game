@@ -98,7 +98,6 @@ public class StudentController : MonoBehaviour
         }
         else
         {
-            pCon.updateScore(-1);
             this.SpaceToInteractCrying();
         }
         
@@ -177,6 +176,14 @@ public class StudentController : MonoBehaviour
 
         this.thought.GetComponent<thoughtBubble>().setWantedItem(spriteToUse);
         this.noItemWanted = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if(crying)
+        {
+            pCon.updateScore(-1);
+        }
     }
 
 
