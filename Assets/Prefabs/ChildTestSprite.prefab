@@ -149,7 +149,7 @@ MonoBehaviour:
   pCon: {fileID: 0}
   paintSprite: {fileID: 21300000, guid: 76c4e13fe487b3f4e89f9d68a61e70ca, type: 3}
   talkSprite: {fileID: 0}
-  markerSprite: {fileID: 21300000, guid: ca9ccaa93d7e5554a9bf67b3a9395ad9, type: 3}
+  markerSprite: {fileID: 21300000, guid: b63fb1ac62773d945a7b27a666d43e49, type: 3}
   coloredPencilSprite: {fileID: 0}
   crayons: {fileID: 21300000, guid: cd0472323cfd9be4892f570749b2de83, type: 3}
   scissors: {fileID: 21300000, guid: 827e308d8541ce64ba3800ab50778b7f, type: 3}

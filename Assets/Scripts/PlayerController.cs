@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,11 +14,16 @@ public class PlayerController : MonoBehaviour
     public Sprite heldItem;
     public string itemHeldName;
 
-    public Inventory userInterface;
+    private Inventory userInterface;
+    public Text scoreText;
+    public Canvas userInterfaceCanvas;
+
+    private int playerScore = 0;
     
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        userInterface = userInterfaceCanvas.GetComponentInChildren<Inventory>();
         itemHeldName = "none";
         
     }
@@ -78,6 +84,12 @@ public class PlayerController : MonoBehaviour
         holdingItem = false;
         itemHeldName = "none";
 
+    }
+
+    public void updateScore(int points)
+    {
+        this.playerScore += points;
+        this.scoreText.text = this.playerScore.ToString();
     }
    
 }

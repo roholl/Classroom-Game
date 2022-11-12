@@ -30,6 +30,8 @@ public class StudentController : MonoBehaviour
     public float maxWaitTimeForItem = 10f;
     public int scoreFactor;
 
+    private bool crying = false;
+
     private SpriteRenderer studentRenderer;
 
 
@@ -48,46 +50,60 @@ public class StudentController : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        if (!noItemWanted)
+        if(!crying)
         {
-            timeWaited += Time.deltaTime;
 
-            if (timeWaited >= randomTimerInterval)
+            var timePercent = 0f;
+            if (!noItemWanted)
             {
-                timeWaited = 0.0f;
-                randomTimerInterval = Random.Range(randomRangeLow, randomRangeHi);
-                Debug.Log("The annoying child wants shit");
-                this.thoughtCreate();
+                timeWaited += Time.deltaTime;
+                this.studentRenderer.color = Color.white;
+                if (timeWaited >= randomTimerInterval)
+                {
+                    timeWaited = 0.0f;
+                    randomTimerInterval = Random.Range(randomRangeLow, randomRangeHi);
+                    Debug.Log("The annoying child wants shit");
+                    this.thoughtCreate();
+                }
             }
+            else
+            {
+
+                timePercent = waitTimeForItem / maxWaitTimeForItem;
+
+                if (timePercent >= .75)
+                {
+                    this.studentRenderer.color = Color.red;
+                }
+                else if (timePercent >= .5)
+                {
+                    this.studentRenderer.color = Color.yellow;
+                }
+                else
+                {
+                    this.studentRenderer.color = Color.white;
+                }
+                
+
+                waitTimeForItem += Time.deltaTime;
+                if (waitTimeForItem >= maxWaitTimeForItem)
+                {
+                    this.itemReset(0);
+                    this.studentRenderer.color = Color.blue;
+                    this.crying = true;
+                }
+            }
+            SpaceToInteract(timePercent);
 
         }
         else
         {
-            waitTimeForItem += Time.deltaTime;
-            if(waitTimeForItem >= maxWaitTimeForItem)
-            {
-                this.itemReset();
-            }
-        }
-
-        var timePercent = waitTimeForItem / maxWaitTimeForItem;
-
-        if(timePercent >= .75)
-        {
-            this.studentRenderer.color = Color.red;
-        }
-        else if(timePercent >= .5)
-        {
-            this.studentRenderer.color = Color.yellow;
-        }
-        else
-        {
-            this.studentRenderer.color = Color.white;
+            pCon.updateScore(-1);
+            this.SpaceToInteractCrying();
         }
         
 
-
-        SpaceToInteract();
+        
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -100,7 +116,7 @@ public class StudentController : MonoBehaviour
         inRange = false;
         Debug.Log("You are out of range to talk.");
     }
-    private void SpaceToInteract()
+    private void SpaceToInteract(float percentPoints)
     {
         if (Input.GetKeyDown(KeyCode.Space) && inRange == true)
         {
@@ -109,9 +125,23 @@ public class StudentController : MonoBehaviour
             {
                 Debug.Log("You gave an item to the student.");
                 pCon.itemGiven();
-                this.itemReset();
+
+                var points = ((int)((1 - percentPoints) * 1000));
+                this.itemReset(points);
 
             }
+        }
+    }
+
+    private void SpaceToInteractCrying()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && inRange == true)
+        {
+            Debug.Log("You cheered up a student");
+
+            this.crying = false;
+            this.studentRenderer.color = Color.white;
+
         }
     }
 
@@ -150,12 +180,13 @@ public class StudentController : MonoBehaviour
     }
 
 
-    private void itemReset()
+    private void itemReset(float points)
     {
         this.noItemWanted = false;
         Destroy(this.thought);
         waitTimeForItem = 0.0f;
         itemWantedName = "none";
+        pCon.updateScore((int)points);
     }
     
 }
