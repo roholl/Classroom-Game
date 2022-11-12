@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Sprite heldItem;
     public string itemHeldName;
 
-    public Inventory inventorySpot;
+    public Inventory userInterface;
     
     void Start()
     {
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player: spite update.");
         this.heldItem = itemToHold;
         this.itemHeldName = itemName;
-        inventorySpot.updateInventory(itemToHold);
+        userInterface.updateInventory(itemToHold);
     }
 
     public void itemGiven()
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     private void removeItem()
     {
         Debug.Log("You discarded your item.");
-        inventorySpot.updateInventory(null);
+        userInterface.updateInventory(null);
         holdingItem = false;
         itemHeldName = "none";
 

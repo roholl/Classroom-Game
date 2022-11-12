@@ -151,10 +151,14 @@ MonoBehaviour:
   talkSprite: {fileID: 0}
   markerSprite: {fileID: 21300000, guid: ca9ccaa93d7e5554a9bf67b3a9395ad9, type: 3}
   coloredPencilSprite: {fileID: 0}
-  randomRangeHi: 5
-  randomRangeLow: 10
+  crayons: {fileID: 21300000, guid: cd0472323cfd9be4892f570749b2de83, type: 3}
+  scissors: {fileID: 21300000, guid: 827e308d8541ce64ba3800ab50778b7f, type: 3}
+  randomRangeHi: 25
+  randomRangeLow: 5
   thoughtbubblePrefab: {fileID: 2643363534107712824, guid: 6fc80aabd25dfa541a1c2b5786039481,
     type: 3}
+  maxWaitTimeForItem: 25
+  scoreFactor: 0
 --- !u!58 &4961569997878688177
 CircleCollider2D:
   m_ObjectHideFlags: 0
